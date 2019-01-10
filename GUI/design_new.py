@@ -10,35 +10,41 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
 	def setupUi(self, MainWindow):
+		# Создаем объект для окна программы и центрального виджета
 		MainWindow.setObjectName("MainWindow")
 		MainWindow.resize(436, 475)
 		self.centralwidget = QtWidgets.QWidget(MainWindow)
 		self.centralwidget.setObjectName("centralwidget")
 
+		# Создаем и настраиваем виджет для ввода матрицы А
 		self.A_field = QtWidgets.QPlainTextEdit(self.centralwidget)
 		self.A_field.setGeometry(QtCore.QRect(50, 20, 150, 150))
 		self.A_field.setTabChangesFocus(True)
 		self.A_field.setObjectName("A_field")
 		self.A_field.setPlaceholderText("1 2 3\n4 5 6\n7 8 9")
 
+		# Создаем и настраиваем виджет для ввода матрицы В
 		self.B_field = QtWidgets.QPlainTextEdit(self.centralwidget)
 		self.B_field.setGeometry(QtCore.QRect(260, 20, 150, 150))
 		self.B_field.setObjectName("B_field")
 		self.B_field.setPlaceholderText("0\n1\n2")
 		self.B_field.setTabChangesFocus(True)
 
+		# Создаем и настраиваем виджет для ввода матрицы С
 		self.C_field = QtWidgets.QPlainTextEdit(self.centralwidget)
 		self.C_field.setGeometry(QtCore.QRect(50, 180, 150, 150))
 		self.C_field.setObjectName("C_field")
 		self.C_field.setPlaceholderText("0 1 2")
 		self.C_field.setTabChangesFocus(True)
 
+		# Создаем и настраиваем виджет для ввода передаточной функции
 		self.TF_field = QtWidgets.QPlainTextEdit(self.centralwidget)
 		self.TF_field.setGeometry(QtCore.QRect(260, 180, 150, 150))
 		self.TF_field.setObjectName("TF_field")
 		self.TF_field.setPlaceholderText("1, 2, 3\n1, 2, 3, 4")
 		self.TF_field.setTabChangesFocus(True)
 
+		# Настройка надпией ('A=', 'B=', и т.д.)
 		self.label = QtWidgets.QLabel(self.centralwidget)
 		self.label.setGeometry(QtCore.QRect(10, 80, 41, 31))
 		self.label.setTextFormat(QtCore.Qt.RichText)
@@ -67,14 +73,17 @@ class Ui_MainWindow(object):
 		self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
 		self.horizontalLayout.setObjectName("horizontalLayout")
 
+		# Создание и настройка кнопки "Старт"
 		self.startButton = QtWidgets.QPushButton(self.layoutWidget)
 		self.startButton.setObjectName("startButton")
 		self.horizontalLayout.addWidget(self.startButton)
 
+		# Создание и настройка кнопки "Очистить"
 		self.clearButton = QtWidgets.QPushButton(self.layoutWidget)
 		self.clearButton.setObjectName("clearButton")
 		self.horizontalLayout.addWidget(self.clearButton)
 
+		# Создание и настройка кнопок для выбора базиса
 		self.ControllRadioButton = QtWidgets.QRadioButton(self.centralwidget)
 		self.ControllRadioButton.setGeometry(QtCore.QRect(270, 358, 131, 23))
 		self.ControllRadioButton.setChecked(True)
@@ -85,11 +94,13 @@ class Ui_MainWindow(object):
 		self.ObserveRadioButton.setChecked(False)
 		self.ObserveRadioButton.setObjectName("ObserveRadioButton")
 
+		# Создание и настройка поля для вывода свойств системы
 		self.SystemQualitiesField = QtWidgets.QTextEdit(self.centralwidget)
 		self.SystemQualitiesField.setGeometry(QtCore.QRect(120, 340, 81, 61))
 		self.SystemQualitiesField.setObjectName("SystemQualitiesField")
 		self.SystemQualitiesField.setReadOnly(True)
 
+		# Настройка надпией ('Базис:', 'Наблюдаема:', и т.д.)
 		self.label_5 = QtWidgets.QLabel(self.centralwidget)
 		self.label_5.setGeometry(QtCore.QRect(16, 340, 101, 20))
 		self.label_5.setObjectName("label_5")
@@ -112,6 +123,7 @@ class Ui_MainWindow(object):
 		QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 	def retranslateUi(self, MainWindow):
+		# Заполняем надписи текстом
 		_translate = QtCore.QCoreApplication.translate
 		MainWindow.setWindowTitle(_translate("MainWindow", "TAYHelper"))
 		self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">A =</span></p></body></html>"))
