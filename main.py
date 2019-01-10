@@ -137,7 +137,7 @@ class Matrix:
 		return self.rank_val
 
 
-	### Статический метод класса Matrix.rank()
+	### Статический метод класса Matrix.diag()
 	### Args: dim - размер желаемой диагональной матрицы, val - значение элементов главной диагонали
 	### Return: Диагональную матрицу
 	@staticmethod
