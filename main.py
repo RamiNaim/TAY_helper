@@ -8,7 +8,7 @@ from GUI import design_new  # Файл с дизайном
 
 
 ### Класс Матрица ###
-### В основном контейнере для элементов self.matrix используется тип данных numpy.poly1d 
+### В основном контейнере для элементов self.matrix используется тип данных numpy.poly1d
 ### для корректного рассчета передаточной функции
 class Matrix:
 	### Конструктор класса
@@ -98,8 +98,8 @@ class Matrix:
 				self.rank_val = 2
 
 			return a1 - a2
-		
-		# Если порядок минора >2 - рекурсивно вызываем метод self.__minor(i, j, indexes), 
+
+		# Если порядок минора >2 - рекурсивно вызываем метод self.__minor(i, j, indexes),
 		# передавая в качестве индексов строк и столбцов только те, которые не были "вычеркнуты" предыдущими рассчетами
 		res = 0
 		count_l = 0
@@ -184,7 +184,7 @@ class Matrix:
 		if det == pol([0]):
 			print("InverseError: Determinant is zero")
 			return None
-		
+
 		# i, j элемент сопряженной матрицы - это i, j минор с учетом знака
 		array = []
 		for i in range(self.n):
@@ -287,7 +287,7 @@ class Matrix:
 
 			res.matrix = array
 			return res
-	
+
 	def __str__(self):
 		out = ""
 		for row in self.matrix:
@@ -313,7 +313,7 @@ class Interface(QtWidgets.QMainWindow, design_new.Ui_MainWindow):
 		# Привязка функций, которые будут выполняться при нажатии на кнопки
 		self.startButton.clicked.connect(self.parse_fields)
 		self.clearButton.clicked.connect(self.clear_fields)
-															
+
 	### Метод self.parse_field()
 	### Args: -
 	### Return: -
@@ -489,6 +489,23 @@ class Interface(QtWidgets.QMainWindow, design_new.Ui_MainWindow):
 		# Записываем передаточную функцию в соответствующее поле
 		self.TF_field.setPlainText( tf_str )
 
+	def parse_string_matrix(self, str_matrix):
+		str_matrix = str_matrix.split('\n')
+		res = []
+		for str_row in str_matrix:
+			splitted_row = str_row.split(' ')
+			row = []
+			for symbol in splitted_row:
+				if symbol:
+					num = complex(symbol)
+					if num.imag == 0:
+						num = float(num.real)
+					row.append([num])
+			if row:
+				res.append(row)
+		return res
+
+
 	### Метод self.controllabilityCheck()
 	### Args: -
 	### Return: -
@@ -522,7 +539,7 @@ class Interface(QtWidgets.QMainWindow, design_new.Ui_MainWindow):
 	### Метод self.stabilityCheck()
 	### Args: -
 	### Return: -
-	### Метод проверяет систему на устойчивость	
+	### Метод проверяет систему на устойчивость
 	def stabilityCheck(self):
 		self.stable = True
 
@@ -537,7 +554,7 @@ class Interface(QtWidgets.QMainWindow, design_new.Ui_MainWindow):
 
 	### Метод self.parse_string()
 	### Args: str_matrix - матрица в виде строки, выгруженной из поля ввода
-	### Return: res - объект Matrix() 
+	### Return: res - объект Matrix()
 	### Метод переводит матрицу в виде строки в объект Matrix()
 	def parse_string(self, str_matrix):
 		str_matrix = str_matrix.split('\n')
@@ -580,4 +597,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
